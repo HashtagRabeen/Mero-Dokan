@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { CartContext } from "../Context/CartProvider";
+import { Bounce, toast } from "react-toastify";
 
 function ProductDescription() {
   const [single, setSingle] = useState({});
@@ -12,7 +13,9 @@ function ProductDescription() {
   console.log(id);
 
   const getSingleProduct = async () => {
-    let response = await fetch(`http://localhost:9000/api/getProductById/${id}`); //in this useParams give id not _id
+    let response = await fetch(
+      `http://localhost:9000/api/getProductById/${id}`
+    ); //in this useParams give id not _id
     response = await response.json();
     // console.log(response.singleMomo);
     setSingle(response.singleProduct);
@@ -41,11 +44,27 @@ function ProductDescription() {
           <h1>Product Category: {single.category}</h1>
           <div className="space-x-10">
             <button className="bg-blue-500 w-40 text-white p-3 rounded-sm">
-              <NavLink to="/payment" state={{ total_items:1, total_amount: single.price }}>Buy Now</NavLink>
+              <NavLink
+                to="/payment"
+                state={{ total_items: 1, total_amount: single.price }}
+              >
+                Buy Now
+              </NavLink>
             </button>
             <button
               onClick={() => {
                 cartDispatch({ type: "ADD_TO_CART", payload: { ...single } });
+                toast.success(`${single.name} Added to Cart`, {
+                  position: "top-right",
+                  autoClose: 1500,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                  transition: Bounce,
+                });
               }}
               className="bg-orange-600 w-40 text-white p-3 "
             >

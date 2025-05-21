@@ -28,7 +28,7 @@ const CartReducer = (state, action) => {
         // action.payload={name,price}
         const newCartItem = { ...action.payload, qty: 1 };
         const updatedCartItems = [...state.CartItems, newCartItem];
-        alert(`${action.payload.name}, Added to cart`);
+        // alert(`${action.payload.name}, Added to cart`);
         return {
           ...state,
           CartItems: updatedCartItems,
@@ -51,7 +51,7 @@ const CartReducer = (state, action) => {
     case "Decrement": {
       const updatedCart = state.CartItems.map((item) => {
         if (item._id === action.payload._id && item.qty > 1) {
-          return { ...item, qty: item.qty - 1 }; 
+          return { ...item, qty: item.qty - 1 };
         } else {
           return item;
         }
