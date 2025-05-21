@@ -15,7 +15,7 @@ function Navbar() {
     return acc + item.qty;
   }, 0);
   return (
-    <div className="flex justify-center items-center gap-10 h-20 shadow-md">
+    <div className="flex justify-center items-center gap-10 h-20 shadow-md sticky top-0 z-50 bg-white">
       <div className="flex justify-center items-center w-56 h-[48px] mb-2">
         <span>
           <img
